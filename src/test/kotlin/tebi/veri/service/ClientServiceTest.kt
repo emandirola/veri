@@ -30,5 +30,18 @@ class ClientTest {
         assertThat(client.balance).isEqualTo(0)
     }
 
+    @Test
+    fun `deposit money`() {
+        // given
+        clientService.createClient("francisco")
+
+        // when
+        clientService.deposit("francisco", 100)
+
+        // then
+        val client = clientService.getClient("francisco")!!
+        assertThat(client.balance).isEqualTo(100)
+    }
+
 }
 
