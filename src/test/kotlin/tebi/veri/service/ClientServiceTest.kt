@@ -1,6 +1,7 @@
 package tebi.veri.service
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.catchThrowable
 import org.junit.Before
 import org.junit.Test
 import tebi.veri.domain.model.Client
@@ -13,7 +14,6 @@ class ClientTest {
     @Before
     fun before() {
         clientService = ClientService(InMemoryClientRepository())
-
     }
 
     @Test
@@ -45,7 +45,7 @@ class ClientTest {
 
     @Test
     fun `scenario 1 existing user deposits money`() {
-        // give
+        // given
         clientService.createClient("francisco")
         clientService.deposit("francisco", 100)
 
@@ -55,6 +55,19 @@ class ClientTest {
         // then
         val client = clientService.getClient("francisco")
         assertThat(client!!.balance).isEqualTo(110)
+    }
+
+    @Test
+    fun `can't deposit negative amount`() {
+        // given
+        clientService.createClient("francisco")
+        clientService.deposit("francisco", 100)
+
+        // when
+        val throwable = catchThrowable { clientService.deposit("francisco", -10) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
     }
 
 }
