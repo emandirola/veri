@@ -14,5 +14,9 @@ class InMemoryClientRepository : ClientRepository {
     override fun findClient(clientId: EntityId): Client? {
         return repository[clientId]
     }
+
+    override fun updateClient(client: Client) {
+        repository[client.id] = client
+    }
 }
 

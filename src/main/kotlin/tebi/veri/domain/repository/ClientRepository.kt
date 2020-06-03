@@ -7,5 +7,6 @@ interface ClientRepository {
 
     fun insertClient(client: Client)
     fun findClient(clientId: EntityId): Client?
+    fun updateClient(client: Client)
 
 }
