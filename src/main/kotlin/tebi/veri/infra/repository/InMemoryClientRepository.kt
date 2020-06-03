@@ -8,6 +8,7 @@ class InMemoryClientRepository : ClientRepository {
     private val repository: MutableMap<EntityId, Client> = hashMapOf()
 
     override fun insertClient(client: Client) {
+        if (client.id in repository) throw IllegalArgumentException("Client already exists")
         repository[client.id] = client
     }
 
@@ -16,6 +17,7 @@ class InMemoryClientRepository : ClientRepository {
     }
 
     override fun updateClient(client: Client) {
+        if (client.id !in repository) throw IllegalArgumentException("Client doesn't exist")
         repository[client.id] = client
     }
 }
