@@ -10,6 +10,7 @@ class Client(
     private val account: Account
 ) : Entity {
     fun addBalance(amount: Int) {
+        if (amount < 0) throw IllegalArgumentException("Can't deposit negative money")
         account.balance += amount
     }
 
