@@ -70,5 +70,19 @@ class ClientTest {
         assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
     }
 
+    @Test
+    fun `withdraw money`() {
+        // given
+        clientService.createClient("francisco")
+        clientService.deposit("francisco", 100)
+
+        // when
+        clientService.withdraw("francisco", 10)
+
+        // then
+        val client = clientService.getClient("francisco")
+        assertThat(client!!.balance).isEqualTo(90)
+    }
+
 }
 
