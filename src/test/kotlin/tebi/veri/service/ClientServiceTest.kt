@@ -107,5 +107,27 @@ class ClientTest {
         assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
     }
 
+    @Test
+    fun `can't deposit if client doesn't exist`() {
+        // given
+
+        // when
+        val throwable = catchThrowable { clientService.deposit("francisco", 10) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @Test
+    fun `can't withdraw if client doesn't exist`() {
+        // given
+
+        // when
+        val throwable = catchThrowable { clientService.withdraw("francisco", 10) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+    }
+
 }
 
