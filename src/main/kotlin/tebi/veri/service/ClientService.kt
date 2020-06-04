@@ -15,6 +15,10 @@ class ClientService(private val repository: ClientRepository) {
         return repository.findClient(EntityId(id))
     }
 
+    fun balance(id: String): Int? {
+        return getClient(id)?.balance
+    }
+
     fun deposit(id: String, amount: Int) {
         val client = getClient(id)
         client!!.addBalance(amount)

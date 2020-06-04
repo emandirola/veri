@@ -39,8 +39,7 @@ class ClientTest {
         clientService.deposit("francisco", 100)
 
         // then
-        val client = clientService.getClient("francisco")!!
-        assertThat(client.balance).isEqualTo(100)
+        assertThat(clientService.balance("francisco")).isEqualTo(100)
     }
 
     @Test
@@ -53,8 +52,7 @@ class ClientTest {
         clientService.deposit("francisco", 10)
 
         // then
-        val client = clientService.getClient("francisco")
-        assertThat(client!!.balance).isEqualTo(110)
+        assertThat(clientService.balance("francisco")).isEqualTo(110)
     }
 
     @Test
@@ -80,8 +78,7 @@ class ClientTest {
         clientService.withdraw("francisco", 10)
 
         // then
-        val client = clientService.getClient("francisco")
-        assertThat(client!!.balance).isEqualTo(90)
+        assertThat(clientService.balance("francisco")).isEqualTo(90)
     }
 
 }
