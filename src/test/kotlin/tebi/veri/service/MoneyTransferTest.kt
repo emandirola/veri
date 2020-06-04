@@ -44,4 +44,20 @@ class MoneyTransferTest {
         assertThat(clientService.balance("francisco")).isEqualTo(100)
         assertThat(clientService.balance("alejandro")).isEqualTo(0)
     }
+
+    @Test
+    fun `can't transfer negative money`() {
+        // given
+        clientService.createClient("francisco")
+        clientService.deposit("francisco", 100)
+        clientService.createClient("alejandro")
+
+        // when
+        val throwable = catchThrowable { clientService.wire("francisco", "alejandro", -10) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(clientService.balance("francisco")).isEqualTo(100)
+        assertThat(clientService.balance("alejandro")).isEqualTo(0)
+    }
 }
