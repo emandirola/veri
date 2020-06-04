@@ -50,9 +50,9 @@ Check whether it is possible to withdraw a negative value. If it is possible, fi
 
 ## Retrospective
 
-- Are you keeping up with the requirements? Has any iteration been a big challenge?
-- Do you feel good about your design? Is it scalable and easily adapted to new requirements that come up in further iterations?
-- Is everything tested? Are you confident in your tests?
+- Are you keeping up with the requirements? Has any iteration been a big challenge? (La primera en la que armé el modelo, probablemente tendría que haberlo armado en un refactor? Senti que como ya lo conocía no había taaaaaanto sentido para hacerlo después)
+- Do you feel good about your design? Is it scalable and easily adapted to new requirements that come up in further iterations? (Hoy sí, mañana veremos)
+- Is everything tested? Are you confident in your tests? (Yes)
 
 ### Iteration 6: Add the transfer feature
 
