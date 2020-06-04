@@ -60,4 +60,31 @@ class MoneyTransferTest {
         assertThat(clientService.balance("francisco")).isEqualTo(100)
         assertThat(clientService.balance("alejandro")).isEqualTo(0)
     }
+
+    @Test
+    fun `can't transfer from unexistent client`() {
+        // given
+        clientService.createClient("alejandro")
+
+        // when
+        val throwable = catchThrowable { clientService.wire("francisco", "alejandro", 100) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(clientService.balance("alejandro")).isEqualTo(0)
+    }
+
+    @Test
+    fun `can't transfer to unexistent client`() {
+        // given
+        clientService.createClient("francisco")
+        clientService.deposit("francisco", 100)
+
+        // when
+        val throwable = catchThrowable { clientService.wire("francisco", "alejandro", 100) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(clientService.balance("francisco")).isEqualTo(100)
+    }
 }
