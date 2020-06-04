@@ -15,7 +15,8 @@ class Client(
     }
 
     fun withdraw(amount: Int) {
-        if (amount > account.balance) throw java.lang.IllegalArgumentException("Can't overdraft")
+        if (amount > account.balance) throw IllegalArgumentException("Can't overdraft")
+        if (amount < 0) throw  IllegalArgumentException("Can't withdraw negative money")
         account.balance -= amount
     }
 
