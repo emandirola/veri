@@ -31,4 +31,11 @@ class ClientService(private val repository: ClientRepository) {
         this.repository.updateClient(client)
     }
 
+    fun wire(idFrom: String, idTo: String, amount: Int) {
+        val fromClient = getClient(idFrom)!!
+        val toClient = getClient(idTo)!!
+        fromClient.withdraw(amount)
+        toClient.deposit(amount)
+    }
+
 }
