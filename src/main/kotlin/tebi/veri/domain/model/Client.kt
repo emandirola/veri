@@ -14,6 +14,10 @@ class Client(
         account.balance += amount
     }
 
+    fun removeBalance(amount: Int) {
+        account.balance -= amount
+    }
+
     val balance
         get() = account.balance
 }

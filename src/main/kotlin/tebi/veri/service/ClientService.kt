@@ -21,4 +21,10 @@ class ClientService(private val repository: ClientRepository) {
         this.repository.updateClient(client)
     }
 
+    fun withdraw(id: String, amount: Int) {
+        val client = getClient(id)
+        client!!.removeBalance(amount)
+        this.repository.updateClient(client)
+    }
+
 }
