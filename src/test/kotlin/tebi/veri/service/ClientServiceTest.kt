@@ -81,5 +81,18 @@ class ClientTest {
         assertThat(clientService.balance("francisco")).isEqualTo(90)
     }
 
+    @Test
+    fun `can't overdraft`() {
+        // given
+        clientService.createClient("francisco")
+        clientService.deposit("francisco", 100)
+
+        // when
+        val throwable = catchThrowable { clientService.withdraw("francisco", 200) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+    }
+
 }
 
