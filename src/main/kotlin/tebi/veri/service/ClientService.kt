@@ -16,7 +16,7 @@ class ClientService(private val repository: ClientRepository) {
     }
 
     fun balance(id: String): Int? {
-        return getClient(id)?.balance
+        return getClient(id)?.balance ?: throw IllegalArgumentException("Client doesn't exist")
     }
 
     fun deposit(id: String, amount: Int) {
