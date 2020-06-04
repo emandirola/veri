@@ -11,29 +11,29 @@ class ClientService(private val repository: ClientRepository) {
         this.repository.insertClient(client)
     }
 
-    fun getClient(id: String): Client? {
-        return repository.findClient(EntityId(id))
+    fun getClient(id: String): Client {
+        return repository.findClient(EntityId(id)) ?: throw IllegalArgumentException("Client $id doesn't exist")
     }
 
     fun balance(id: String): Int? {
-        return getClient(id)?.balance ?: throw IllegalArgumentException("Client doesn't exist")
+        return getClient(id).balance
     }
 
     fun deposit(id: String, amount: Int) {
-        val client = getClient(id) ?: throw IllegalArgumentException("Client doesn't exist")
+        val client = getClient(id)
         client.deposit(amount)
         this.repository.updateClient(client)
     }
 
     fun withdraw(id: String, amount: Int) {
-        val client = getClient(id) ?: throw IllegalArgumentException("Client doesn't exist")
+        val client = getClient(id)
         client.withdraw(amount)
         this.repository.updateClient(client)
     }
 
     fun wire(idFrom: String, idTo: String, amount: Int) {
-        val fromClient = getClient(idFrom) ?: throw IllegalArgumentException("Transferer client doesn't exist")
-        val toClient = getClient(idTo) ?: throw IllegalArgumentException("Receiver client doesn't exist")
+        val fromClient = getClient(idFrom)
+        val toClient = getClient(idTo)
         fromClient.withdraw(amount)
         toClient.deposit(amount)
     }
