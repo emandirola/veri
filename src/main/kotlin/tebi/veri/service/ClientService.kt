@@ -20,14 +20,14 @@ class ClientService(private val repository: ClientRepository) {
     }
 
     fun deposit(id: String, amount: Int) {
-        val client = getClient(id)
-        client!!.deposit(amount)
+        val client = getClient(id) ?: throw IllegalArgumentException("Client doesn't exist")
+        client.deposit(amount)
         this.repository.updateClient(client)
     }
 
     fun withdraw(id: String, amount: Int) {
-        val client = getClient(id)
-        client!!.withdraw(amount)
+        val client = getClient(id) ?: throw IllegalArgumentException("Client doesn't exist")
+        client.withdraw(amount)
         this.repository.updateClient(client)
     }
 
