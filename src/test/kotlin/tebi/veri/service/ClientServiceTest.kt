@@ -94,5 +94,18 @@ class ClientTest {
         assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
     }
 
+    @Test
+    fun `can't withdraw negative money`() {
+        // given
+        clientService.createClient("francisco")
+        clientService.deposit("francisco", 100)
+
+        // when
+        val throwable = catchThrowable { clientService.withdraw("francisco", -10) }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+    }
+
 }
 
