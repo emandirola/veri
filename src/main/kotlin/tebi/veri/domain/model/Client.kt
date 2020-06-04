@@ -9,12 +9,12 @@ class Client(
     /** root entity **/
     private val account: Account
 ) : Entity {
-    fun addBalance(amount: Int) {
+    fun deposit(amount: Int) {
         if (amount < 0) throw IllegalArgumentException("Can't deposit negative money")
         account.balance += amount
     }
 
-    fun removeBalance(amount: Int) {
+    fun withdraw(amount: Int) {
         if (amount > account.balance) throw java.lang.IllegalArgumentException("Can't overdraft")
         account.balance -= amount
     }

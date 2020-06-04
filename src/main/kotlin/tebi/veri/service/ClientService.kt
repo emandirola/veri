@@ -21,13 +21,13 @@ class ClientService(private val repository: ClientRepository) {
 
     fun deposit(id: String, amount: Int) {
         val client = getClient(id)
-        client!!.addBalance(amount)
+        client!!.deposit(amount)
         this.repository.updateClient(client)
     }
 
     fun withdraw(id: String, amount: Int) {
         val client = getClient(id)
-        client!!.removeBalance(amount)
+        client!!.withdraw(amount)
         this.repository.updateClient(client)
     }
 
