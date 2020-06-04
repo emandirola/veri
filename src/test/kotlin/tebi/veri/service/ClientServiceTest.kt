@@ -129,5 +129,16 @@ class ClientTest {
         assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
     }
 
+    @Test
+    fun `can't check balance if client doesn't exist`() {
+        // given
+
+        // when
+        val throwable = catchThrowable { clientService.balance("francisco") }
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
+    }
+
 }
 
