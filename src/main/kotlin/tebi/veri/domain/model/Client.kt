@@ -15,6 +15,7 @@ class Client(
     }
 
     fun removeBalance(amount: Int) {
+        if (amount > account.balance) throw java.lang.IllegalArgumentException("Can't overdraft")
         account.balance -= amount
     }
 
