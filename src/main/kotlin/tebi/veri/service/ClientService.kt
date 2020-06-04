@@ -32,8 +32,8 @@ class ClientService(private val repository: ClientRepository) {
     }
 
     fun wire(idFrom: String, idTo: String, amount: Int) {
-        val fromClient = getClient(idFrom)!!
-        val toClient = getClient(idTo)!!
+        val fromClient = getClient(idFrom) ?: throw IllegalArgumentException("Transferer client doesn't exist")
+        val toClient = getClient(idTo) ?: throw IllegalArgumentException("Receiver client doesn't exist")
         fromClient.withdraw(amount)
         toClient.deposit(amount)
     }
